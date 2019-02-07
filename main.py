@@ -38,9 +38,13 @@ def play_game(ng):
         opp_move = str(input('What is your move? '))
         if(opp_move == 'q'):
             break
+        elif(opp_move not in 'prs'):
+            print('not a valid move!')
+            continue
 
         ai_move = loss_dict[ng.get_most_frequent(opp_moves)]
 
+        print('You threw', opp_move, 'and the computer threw', ai_move)
 
         if win_dict[opp_move] == ai_move:
             print('You win!')
@@ -52,8 +56,10 @@ def play_game(ng):
             print('You lose!')
             stats['loses'] += 1
 
+        opp_moves.append(opp_move)
 
-    print('You had ')
+
+    print('You had', stats['wins'], 'wins,', stats['loses'], 'losses, and', stats['ties'], 'ties.')
 
 if __name__ == '__main__':
     main()
